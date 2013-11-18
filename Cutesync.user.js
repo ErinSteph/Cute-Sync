@@ -6,10 +6,10 @@
 // @credits	Milky and his Namesync
 // @include	*4chan.org/b/*
 // @include	*4chan.org/soc/*
-// @version	1.0.2
+// @version	1.0.3
 // ==/UserScript==
 
-function initCutesync(){
+function initCuteSync(){
 
         var d, db, $, $$;
 
@@ -17,48 +17,55 @@ function initCutesync(){
         db = document.body;
 
         $ = function(s, p){
-					if(!p || p == null){
-							p = db;
-					}
-					return p.querySelector(s);
-                }        
+			if(!p || p == null){
+					p = db;
+			}
+			return p.querySelector(s);
+		}        
                 
         $$ = function(s, p){
-					if(!p || p == null){
-							p = db;
-					}
-					return p.querySelectorAll(s);
-                }                
+			if(!p || p == null){
+					p = db;
+			}
+			return p.querySelectorAll(s);
+		}                
                 
         $.htm = function(s, v){
-					if(!v || v == null){
-							return s.innerHTML;
-					}else{
-							s.innerHTML = v;
-					}
-					return s;
-                }                
+			if(!v || v == null){
+					return s.innerHTML;
+			}else{
+					s.innerHTML = v;
+			}
+			return s;
+		}
+				
+		$.event = function(t, i) {
+			if (i == null) {
+				i = {};
+			}
+			return d.dispatchEvent(new CustomEvent(t, i));
+		}                
                 
         $.get = function(t, b){
-				var x = new XMLHttpRequest();
-				x.overrideMimeType('application/json');
-				x.onreadystatechange = function () {
-					if (x.readyState == 4) {
-						var syncData, tgt, synced, rTrip, rName;
-						syncData = JSON.parse(x.responseText);
-						for(var ii=0; ii < syncData.length; ii++){
-							rTrip = (syncData[ii]['t'] || '');
-							rName = (syncData[ii]['n'] || 'Anonymous');
-							tgt = $('.name', $('#pc'+syncData[ii]['p'], $('#t'+t)));
-							synced = $.htm(tgt, rName + ' <span style="font-weight:normal;">' + rTrip + '</span>');
-						}
-						return x.responseText;
+			var x = new XMLHttpRequest();
+			x.overrideMimeType('application/json');
+			x.onreadystatechange = function () {
+				if (x.readyState == 4) {
+					var syncData, tgt, synced, rTrip, rName;
+					syncData = JSON.parse(x.responseText);
+					for(var ii=0; ii < syncData.length; ii++){
+						rTrip = (syncData[ii]['t'] || '');
+						rName = (syncData[ii]['n'] || 'Anonymous');
+						tgt = $('.name', $('#pc'+syncData[ii]['p'], $('#t'+t)));
+						synced = $.htm(tgt, rName + ' <span style="font-weight:normal;">' + rTrip + '</span>');
 					}
+					return $.event('NamesSynced', { detail: { board: b, thread: t } });
 				}
-				x.open("GET", "https://www.namesync.org/namesync/qp.php?t="+t+"&b="+b, true);
-				x.setRequestHeader('X-Requested-With', 'NameSync4.5.2');
-				x.send();
 			}
+			x.open("GET", "https://www.namesync.org/namesync/qp.php?t="+t+"&b="+b, true);
+			x.setRequestHeader('X-Requested-With', 'NameSync4.5.2');
+			x.send();
+		}
 
         var $threads = $$('.thread');
 		function gPage(){
@@ -67,6 +74,7 @@ function initCutesync(){
 					var $thread = $threads[n].id.split('t')[1];        
 					$.get($thread, $board);
 			}
+			return false;
 		}
 		gPage();
 		
@@ -79,6 +87,7 @@ function initCutesync(){
 				$di = setInterval(function(){bi()},100);
 				clearInterval($ci);
 			}
+			return false;
 		}
 		
 		function bi(){
@@ -86,8 +95,10 @@ function initCutesync(){
 				gPage();
 				$ci = setInterval(function(){ei()},100);
 				clearInterval($di);
+				return $.event('ThreadUpdate', { detail: { board: b, thread: t } });
 			}
+			return false;
 		}
 
 }
-initCutesync();
+initCuteSync();

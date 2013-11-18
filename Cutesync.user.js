@@ -6,7 +6,7 @@
 // @credits	Milky and his Namesync
 // @include	*4chan.org/b/*
 // @include	*4chan.org/soc/*
-// @version	1.0.1
+// @version	1.0.2
 // ==/UserScript==
 
 function initCutesync(){
@@ -89,4 +89,5 @@ function initCutesync(){
 			}
 		}
 
-} document.addEventListener("DOMContentLoaded", initCutesync, false);
+}
+initCutesync();

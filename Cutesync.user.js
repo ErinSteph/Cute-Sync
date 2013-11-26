@@ -6,7 +6,8 @@
 // @credits	Milky and his Namesync
 // @include	*4chan.org/b/*
 // @include	*4chan.org/soc/*
-// @version	1.0.3
+// @icon    http://i.imgur.com/nLnuluW.png
+// @version	1.0.4
 // ==/UserScript==
 
 function initCuteSync(){
@@ -51,13 +52,18 @@ function initCuteSync(){
 			x.overrideMimeType('application/json');
 			x.onreadystatechange = function () {
 				if (x.readyState == 4) {
-					var syncData, tgt, synced, rTrip, rName;
+					var syncData, tgt, synced, rTrip, rName, rSub, rSubS;
 					syncData = JSON.parse(x.responseText);
 					for(var ii=0; ii < syncData.length; ii++){
 						rTrip = (syncData[ii]['t'] || '');
-						rName = (syncData[ii]['n'] || 'Anonymous');
-						tgt = $('.name', $('#pc'+syncData[ii]['p'], $('#t'+t)));
-						synced = $.htm(tgt, rName + ' <span style="font-weight:normal;">' + rTrip + '</span>');
+						rName = (syncData[ii]['n'] || '');
+						rSub = (syncData[ii]['s'] || '');
+						rSubS = rSub.substring(0,30); 
+						if(rSub.length != rSubS.length){
+							rSubS = rSubS + '...';
+						}
+						tgt = $('.nameBlock', $('#pc'+syncData[ii]['p'], $('#t'+t)));
+						synced = $.htm(tgt, '<span class="name">' + rName + '</span> <span class="postertrip">' + rTrip + '</span><br><span class="subject"><span title="' + rSub + '">' + rSubS + '</span></span>');
 					}
 					return $.event('NamesSynced', { detail: { board: b, thread: t } });
 				}
@@ -68,6 +74,7 @@ function initCuteSync(){
 		}
 
         var $threads = $$('.thread');
+        
 		function gPage(){
 			for(var n=0; n < $threads.length; n++){
 					var $board = window.location.href.split('.org/')[1].split('/')[0];        
@@ -76,11 +83,12 @@ function initCuteSync(){
 			}
 			return false;
 		}
+		
 		gPage();
 		
 		var $di, $ci;
 		
-		$ci = setInterval(function(){ei()},100);
+		$ci = setInterval(function(){ei()},50);
 		
 		function ei(){
 			if($.htm($('.mobile-tu-status')) == 'Updating...'){
@@ -93,12 +101,13 @@ function initCuteSync(){
 		function bi(){
 			if($.htm($('.mobile-tu-status')) != 'Updating...'){
 				gPage();
-				$ci = setInterval(function(){ei()},100);
+				$ci = setInterval(function(){ei()},50);
 				clearInterval($di);
 				return $.event('ThreadUpdate', { detail: { board: b, thread: t } });
 			}
 			return false;
 		}
+
 
 }
 initCuteSync();

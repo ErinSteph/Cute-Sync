@@ -7,7 +7,7 @@
 // @include	*4chan.org/b/*
 // @include	*4chan.org/soc/*
 // @icon    http://i.imgur.com/nLnuluW.png
-// @version	1.0.3
+// @version	1.1.1
 // ==/UserScript==
 
 function initCuteSync(){

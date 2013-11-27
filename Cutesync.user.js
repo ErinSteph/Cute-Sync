@@ -7,7 +7,7 @@
 // @include	*4chan.org/b/*
 // @include	*4chan.org/soc/*
 // @icon    http://i.imgur.com/nLnuluW.png
-// @version	1.1.1
+// @version	1.1.2
 // ==/UserScript==
 
 function initCuteSync(){
@@ -198,7 +198,7 @@ function initCuteSync(){
     		  if(window.location.href.indexOf($.getVal('CSposting', 'undefined')) > -1){
     		      $.setVal('CSposting', 'undefined');
     		      var $newPost = window.location.href.split('#p')[1];
-                  $.get($$thread, $$board, $newPost, $.val($('#syncName'))); 		      
+                  $.get($$thread, $$board, $newPost, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub'))); 		      
     		  }
 		}
 		checkforP();

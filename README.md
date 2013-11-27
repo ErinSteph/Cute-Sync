@@ -1,5 +1,7 @@
 # Cute-Sync~
 
+![](images/table cap.png?raw=true)
+
 CuteSync is a small version of Milky's 4chan NameSync for /b/ and /soc/, designed for mobile devices.
 It does not require 4chan X
 

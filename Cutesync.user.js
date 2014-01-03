@@ -144,7 +144,7 @@ function initCuteSync() {
                             rSubS += '...';
                         }
 						if(rMail ! = ''){
-							var rMailA = '<a href="'+rMail+'">';
+							var rMailA = '<a href="mailto:'+rMail+'">';
 							var rMailB = '</a>';
 						}else{
 							var rMailA = '';

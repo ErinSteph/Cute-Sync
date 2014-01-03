@@ -7,7 +7,7 @@
 // @include	*4chan.org/b/*
 // @include	*4chan.org/soc/*
 // @icon    http://i.imgur.com/nLnuluW.png
-// @version	1.1.3
+// @version	1.1.4
 // ==/UserScript==
 
 function initCuteSync() {
@@ -123,7 +123,7 @@ function initCuteSync() {
             }
             var params = "p=" + p + "&t=" + t + "&b=" + b + "&n=" + (encodeURIComponent(n)) + "&s=" + (encodeURIComponent(s)) + "&e=" + (encodeURIComponent(e)) + "&dnt=0";
             x.open("POST", "https://www.namesync.org/namesync/sp.php", true);
-            x.setRequestHeader('X-Requested-With', 'NameSync4.5.2');
+            x.setRequestHeader('X-Requested-With', 'NameSync4.5.4');
             x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
             x.send(params);
         }
@@ -138,12 +138,20 @@ function initCuteSync() {
                         rTrip = (syncData[ii]['t'] || '');
                         rName = (syncData[ii]['n'] || '');
                         rSub = (syncData[ii]['s'] || '');
+						rMail = (syncData[ii]['e'] || '');
                         rSubS = rSub.substring(0, 30);
                         if(rSub.length != rSubS.length) {
                             rSubS += '...';
                         }
+						if(rMail ! = ''){
+							var rMailA = '<a href="'+rMail+'">';
+							var rMailB = '</a>';
+						}else{
+							var rMailA = '';
+							var rMailB = '';
+						}
                         tgt = $('.nameBlock', $('#pc' + syncData[ii]['p'], $('#t' + t)));
-                        synced = $.htm(tgt, '<span class="name">' + rName + '</span> <span class="postertrip">' + rTrip + '</span><br><span class="subject"><span title="' + rSub + '">' + rSubS + '</span></span>');
+                        synced = $.htm(tgt, rMailA + '<span class="name">' + rName + '</span> <span class="postertrip">' + rTrip + '</span>' + rMailB + '<br><span class="subject"><span title="' + rSub + '">' + rSubS + '</span></span>');
                     }
                     return $.event('NamesSynced', {
                         detail: {

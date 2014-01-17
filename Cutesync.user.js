@@ -1,5 +1,4 @@
 // ==UserScript==
-<<<<<<< HEAD
 // @name        Cutesync
 // @description        Small namesync for 4chan's mobile layout. Does not require 4chan X.
 // @namespace        im.a.gay.cat
@@ -9,17 +8,6 @@
 // @include        *4chan.org/soc/*
 // @icon http://i.imgur.com/nLnuluW.png
 // @version        1.1.3
-=======
-// @name	Cutesync
-// @description	Small namesync for 4chan's mobile layout. Does not require 4chan X.
-// @namespace	im.a.gay.cat
-// @author	team !kittensORw
-// @credits	Milky and his Namesync
-// @include	*4chan.org/b/*
-// @include	*4chan.org/soc/*
-// @icon    http://i.imgur.com/nLnuluW.png
-// @version	1.1.4
->>>>>>> 5f30c361e0be394158a934547ba57b713b319704
 // ==/UserScript==
 
 function initCuteSync() {

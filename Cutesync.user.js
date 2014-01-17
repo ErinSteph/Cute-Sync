@@ -1,4 +1,15 @@
 // ==UserScript==
+<<<<<<< HEAD
+// @name        Cutesync
+// @description        Small namesync for 4chan's mobile layout. Does not require 4chan X.
+// @namespace        im.a.gay.cat
+// @author        team !kittensORw
+// @credits        Milky and his Namesync
+// @include        *4chan.org/b/*
+// @include        *4chan.org/soc/*
+// @icon http://i.imgur.com/nLnuluW.png
+// @version        1.1.3
+=======
 // @name	Cutesync
 // @description	Small namesync for 4chan's mobile layout. Does not require 4chan X.
 // @namespace	im.a.gay.cat
@@ -8,6 +19,7 @@
 // @include	*4chan.org/soc/*
 // @icon    http://i.imgur.com/nLnuluW.png
 // @version	1.1.4
+>>>>>>> 5f30c361e0be394158a934547ba57b713b319704
 // ==/UserScript==
 
 function initCuteSync() {
@@ -217,8 +229,8 @@ function initCuteSync() {
             }
             var $nm = $.elm('tr', null, $('tbody', $('#postForm')));
             $.htm($nm, '<td>Namesync</td><input type="text" id="syncName" placeholder="Name"/><a style="cursor:pointer;margin-left:-20px;" id="clearsyncName">x</a><br>\
-				<input type="text" id="syncEmail" placeholder="Email"/><a style="cursor:pointer;margin-left:-20px;" id="clearsyncEmail">x</a><br>\
-				<input type="text" id="syncSub" placeholder="Subject"/><a style="cursor:pointer;margin-left:-20px;" id="clearsyncSub">x</a>');
+                                <input type="text" id="syncEmail" placeholder="Email"/><a style="cursor:pointer;margin-left:-20px;" id="clearsyncEmail">x</a><br>\
+                                <input type="text" id="syncSub" placeholder="Subject"/><a style="cursor:pointer;margin-left:-20px;" id="clearsyncSub">x</a>');
             prepField('CSname', 'syncName');
             prepField('CSemail', 'syncEmail');
             prepField('CSsub', 'syncSub');

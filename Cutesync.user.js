@@ -7,7 +7,7 @@
 // @include        *4chan.org/b/*
 // @include        *4chan.org/soc/*
 // @icon http://i.imgur.com/nLnuluW.png
-// @version        1.1.3
+// @version        1.1.5
 // ==/UserScript==
 
 function initCuteSync() {
@@ -123,7 +123,7 @@ function initCuteSync() {
             }
             var params = "p=" + p + "&t=" + t + "&b=" + b + "&n=" + (encodeURIComponent(n)) + "&s=" + (encodeURIComponent(s)) + "&e=" + (encodeURIComponent(e)) + "&dnt=0";
             x.open("POST", "https://www.namesync.org/namesync/sp.php", true);
-            x.setRequestHeader('X-Requested-With', 'NameSync4.5.2');
+            x.setRequestHeader('X-Requested-With', 'NameSync4.5.6');
             x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
             x.send(params);
         }
@@ -132,18 +132,25 @@ function initCuteSync() {
             x.overrideMimeType('application/json');
             x.onreadystatechange = function () {
                 if(x.readyState == 4) {
-                    var syncData, tgt, synced, rTrip, rName, rSub, rSubS;
+                    var syncData, tgt, synced, rTrip, rName, rSub, rSubS, rEmail, rEmailB;
                     syncData = JSON.parse(x.responseText);
                     for(var ii = 0; ii < syncData.length; ii++) {
                         rTrip = (syncData[ii]['t'] || '');
                         rName = (syncData[ii]['n'] || '');
                         rSub = (syncData[ii]['s'] || '');
                         rSubS = rSub.substring(0, 30);
+						if((syncData[ii]['e'] || null) == null){
+							rEmail = '';
+							rEmailB = '';
+						}else{
+							rEmail = '<a href="mailto:'+syncData[ii]['e']+'">';
+							rEmailB = '</a>';
+						}
                         if(rSub.length != rSubS.length) {
                             rSubS += '...';
                         }
                         tgt = $('.nameBlock', $('#pc' + syncData[ii]['p'], $('#t' + t)));
-                        synced = $.htm(tgt, '<span class="name">' + rName + '</span> <span class="postertrip">' + rTrip + '</span><br><span class="subject"><span title="' + rSub + '">' + rSubS + '</span></span>');
+                        synced = $.htm(tgt, '<span class="name">' + rEmail + rName + rEmailB + '</span> <span class="postertrip">' + rTrip + '</span><br><span class="subject"><span title="' + rSub + '">' + rSubS + '</span></span>');
                     }
                     return $.event('NamesSynced', {
                         detail: {
@@ -194,7 +201,7 @@ function initCuteSync() {
     }, 50);
 
     function buildFrm() {
-        if($.htm($('#postForm')).indexOf('syncName') == -1) {
+        if($.htm($('#absbot')).indexOf('syncName') == -1) {
             function prepField(sv, sid) {
                 if($.getVal(sv, 'unav') != 'unav') {
                     $.val($('#' + sid), $.getVal(sv, ' '));
@@ -207,10 +214,13 @@ function initCuteSync() {
                     $.setVal(sv, $.val($('#' + sid)));
                 }, false);
             }
-            var $nm = $.elm('tr', null, $('tbody', $('#postForm')));
-            $.htm($nm, '<td>Namesync</td><input type="text" id="syncName" placeholder="Name"/><a style="cursor:pointer;margin-left:-20px;" id="clearsyncName">x</a><br>\
-                                <input type="text" id="syncEmail" placeholder="Email"/><a style="cursor:pointer;margin-left:-20px;" id="clearsyncEmail">x</a><br>\
-                                <input type="text" id="syncSub" placeholder="Subject"/><a style="cursor:pointer;margin-left:-20px;" id="clearsyncSub">x</a>');
+            var $nm = {};
+			$nm['style'] = 'margin-left:auto;margin-right:auto;width:200px;text-align:center;border:1px solid;padding-bottom:10px;';
+			$nm = $.elm('div', $nm, $('#absbot'));
+            $.htm($nm, '<h3 style="background:#EEAA88;margin-top:0px;">Namesync</h3>\
+								<input type="text" id="syncName" placeholder="Name"/><a style="cursor:pointer;margin-left:-12px;" id="clearsyncName">x</a><br>\
+                                <input type="text" id="syncEmail" placeholder="Email"/><a style="cursor:pointer;margin-left:-12px;" id="clearsyncEmail">x</a><br>\
+								<input type="text" id="syncSub" placeholder="Subject"/><a style="cursor:pointer;margin-left:-12px;" id="clearsyncSub">x</a>');
             prepField('CSname', 'syncName');
             prepField('CSemail', 'syncEmail');
             prepField('CSsub', 'syncSub');
@@ -228,6 +238,7 @@ function initCuteSync() {
             var $newPost = window.location.href.split('#p')[1];
             $.get($$thread, $$board, $newPost, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub')));
         }
+		d.addEventListener('4chanQRPostSuccess', function(e){ $.get($$thread, $$board, e.detail.postId, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub'))); }, false);
     }
     cfP();
 
@@ -235,39 +246,7 @@ function initCuteSync() {
         $.setVal('CSposting', $$thread);
     }
 
-    function ei() {
-        if($.htm($('.mobile-tu-status')) == 'Updating...') {
-            $di = setInterval(function () {
-                bi()
-            }, 100);
-            clearInterval($ci);
-        }
-        return false;
-    }
-
-    function bi() {
-        if($.htm($('.mobile-tu-status')) != 'Updating...') {
-            gPage();
-            $ci = setInterval(function () {
-                ei()
-            }, 50);
-            clearInterval($di);
-            if(cnPg() != $pg) {
-                $cn = cnPg() - $pg;
-                $pg = cnPg();
-                return $.event('ThreadUpdate', {
-                    detail: {
-                        board: b,
-                        thread: t,
-                        count: $cn
-                    }
-                });
-            }
-            return false;
-        }
-        return false;
-    }
-
+d.addEventListener('4chanThreadUpdated', function(e){ gPage(); }, false);
 
 }
 initCuteSync();

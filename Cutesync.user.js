@@ -7,7 +7,7 @@
 // @include        *4chan.org/b/*
 // @include        *4chan.org/soc/*
 // @icon http://i.imgur.com/nLnuluW.png
-// @version        1.1.5
+// @version        1.1.6
 // ==/UserScript==
 
 function initCuteSync() {
@@ -179,9 +179,9 @@ function initCuteSync() {
 
     gPage();
 
-    if(window.location.href.indexOf('/res/') > -1) {
-        var $$thread = window.location.href.split('/res/')[1].split('#')[0];
-        var $$board = window.location.href.split('/res/')[0].split('.org/')[1];
+    if(window.location.href.indexOf('/thread/') > -1) {
+        var $$thread = window.location.href.split('/thread/')[1].split('/')[0].split('#')[0];
+        var $$board = window.location.href.split('/thread/')[0].split('.org/')[1];
     }
     else {
         var $$thread = null;
@@ -217,7 +217,7 @@ function initCuteSync() {
             var $nm = {};
 			$nm['style'] = 'margin-left:auto;margin-right:auto;width:200px;text-align:center;border:1px solid;padding-bottom:10px;';
 			$nm = $.elm('div', $nm, $('#absbot'));
-            $.htm($nm, '<h3 style="background:#EEAA88;margin-top:0px;">Namesync</h3>\
+            $.htm($nm, '<h3 style="background:#EEAA88;margin-top:0px;">NameSync</h3>\
 								<input type="text" id="syncName" placeholder="Name"/><a style="cursor:pointer;margin-left:-12px;" id="clearsyncName">x</a><br>\
                                 <input type="text" id="syncEmail" placeholder="Email"/><a style="cursor:pointer;margin-left:-12px;" id="clearsyncEmail">x</a><br>\
 								<input type="text" id="syncSub" placeholder="Subject"/><a style="cursor:pointer;margin-left:-12px;" id="clearsyncSub">x</a>');
@@ -245,7 +245,6 @@ function initCuteSync() {
     function qrPosting() {
         $.setVal('CSposting', $$thread);
     }
-
 d.addEventListener('4chanThreadUpdated', function(e){ gPage(); }, false);
 
 }

@@ -7,7 +7,7 @@
 // @include        *4chan.org/b/*
 // @include        *4chan.org/soc/*
 // @icon http://i.imgur.com/nLnuluW.png
-// @version        1.1.6
+// @version        1.1.7
 // ==/UserScript==
 
 function initCuteSync() {
@@ -112,6 +112,10 @@ function initCuteSync() {
         }
         return e;
     }
+    
+    $.after = function(n, o){       
+        return o.parentNode.insertBefore(n, o.nextSibling);
+    }
 
     $.get = function (t, b, p, n, e, s) {
         if(p) {
@@ -132,7 +136,7 @@ function initCuteSync() {
             x.overrideMimeType('application/json');
             x.onreadystatechange = function () {
                 if(x.readyState == 4) {
-                    var syncData, tgt, synced, rTrip, rName, rSub, rSubS, rEmail, rEmailB;
+                    var syncData, tgt, synced, rTrip, rName, rSub, rSubS, rEmail, rEmailB, nEl, tEl, sEl;
                     syncData = JSON.parse(x.responseText);
                     for(var ii = 0; ii < syncData.length; ii++) {
                         rTrip = (syncData[ii]['t'] || '');
@@ -150,7 +154,23 @@ function initCuteSync() {
                             rSubS += '...';
                         }
                         tgt = $('.nameBlock', $('#pc' + syncData[ii]['p'], $('#t' + t)));
-                        synced = $.htm(tgt, '<span class="name">' + rEmail + rName + rEmailB + '</span> <span class="postertrip">' + rTrip + '</span><br><span class="subject"><span title="' + rSub + '">' + rSubS + '</span></span>');
+                        nEl = $('.name', tgt);
+                        if(!$('.postertrip', tgt)){
+                            tEl = {};
+                            tEl['class'] = 'postertrip';
+                            tEl = $.elm('span', tEl, db);
+                            $.after(tEl, nEl);
+                            sEl = {};
+                            sEl['class'] = 'subject';
+                            sEl = $.elm('span', sEl, db);
+                            $.after(sEl, $('br', tgt));
+                        }else{
+                            tEl = $('.postertrip', tgt);
+                            sEl = $('.subject', tgt);
+                        }
+                        nEl.innerHTML = rEmail + rName + rEmailB;
+                        tEl.innerHTML = rTrip;
+                        sEl.innerHTML = rSubS;
                     }
                     return $.event('NamesSynced', {
                         detail: {

@@ -3,7 +3,7 @@
 
 ![alt tag](https://raw.github.com/team-kittens/Cute-Sync/master/cap.png)
 
-CuteSync is a small version of Milky's 4chan NameSync for /b/ and /soc/, designed for mobile devices.
+CuteSync is a small version of Milky's 4chan NameSync & Opros' FrenSync for /b/ and /soc/, designed for mobile devices.
 
 It does not require 4chan X
 
@@ -19,9 +19,6 @@ Set your name in the fields at the page footer.
 ### Installing~
 
 
-tl;dr i don't know, google it.
+There doesn't seem to be a way to install on iOS currently. But if you know of one, let me know.
 
-this will be way different with different devices and browsers.
-
-I tested it in WebHub for iOS 7.
-
+Android installation instructions [here](https://github.com/ErinSteph/Cute-Sync/blob/master/Android.md)

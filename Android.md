@@ -39,7 +39,7 @@ Tap the Firefox Nightly logo five times, until the "Debug menu enabled" notifica
 
 Go back to settings, and hit "Custom Add-on collection"
 
-![alt tag](https://raw.github.com/ErinSteph/Cute-Sync/master/installing/6.png
+![alt tag](https://raw.github.com/ErinSteph/Cute-Sync/master/installing/6.png)
 
 Insert your User ID and Collection name from earlier
 

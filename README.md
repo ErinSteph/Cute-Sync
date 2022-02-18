@@ -19,6 +19,6 @@ Set your name in the fields at the page footer.
 ### Installing~
 
 
-There doesn't seem to be a way to install on iOS currently. But if you know of one, let me know.
+iOS installation instructions [here](https://github.com/ErinSteph/Cute-Sync/blob/master/iOS.md)
 
 Android installation instructions [here](https://github.com/ErinSteph/Cute-Sync/blob/master/Android.md)

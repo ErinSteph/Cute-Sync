@@ -9,7 +9,7 @@
 // @icon http://i.imgur.com/nLnuluW.png
 // @updateURL     https://erinsteph.com/tfk/Cutesync.user.js
 // @downloadURL     https://erinsteph.com/tfk/Cutesync.user.js
-// @version        2.0.0
+// @version        2.1.0
 // ==/UserScript==
 
 function initCuteSync() {
@@ -390,9 +390,9 @@ function initCuteSync() {
 
     $cn = 0;
     $pg = cnPg();
-    $ci = setInterval(function () {
-        ei()
-    }, 50);
+    //$ci = setInterval(function () {
+        //ei()
+    //}, 50);
 
     function buildFrm() {
         if($.htm($('#absbot')).indexOf('syncName') == -1) {
@@ -418,19 +418,45 @@ function initCuteSync() {
                 }, false);
             }
             var $nm = {};
-			      $nm['style'] = 'margin-left:auto;margin-right:auto;width:200px;text-align:center;border:1px solid;padding-bottom:10px;';
+			      $nm['style'] = 'margin-left:auto;margin-right:auto;width:200px;text-align:center;border:1px solid;padding-bottom:10px;position:relative;';
 			      $nm = $.elm('div', $nm, $('#absbot'));
-            $.htm($nm, '<h3 style="background:#EEAA88;margin-top:0px;">NameSync</h3>\
-								<input type="text" id="syncName" placeholder="Name"/><a style="cursor:pointer;margin-left:-12px;" id="clearsyncName">x</a><br>\
-                                <input type="text" id="syncEmail" placeholder="Email"/><a style="cursor:pointer;margin-left:-12px;" id="clearsyncEmail">x</a><br>\
-								<input type="text" id="syncSub" placeholder="Subject"/><a style="cursor:pointer;margin-left:-12px;" id="clearsyncSub">x</a><br>\
+            $.htm($nm, '<div style="background:#EEAA88;margin-top:0px;position:relative;display:inline-block;width:100%;margin-bottom:10px;">\
+                <input type="checkbox" id="useCute" name="useCute" style="position:absolute;right:0px;" value="useCute"><h3 style="margin:3px;">CuteSync</h3></div>\
+								<input type="text" id="syncName" placeholder="Name"/><a style="cursor:pointer;position:absolute;right:10px;" id="clearsyncName">x</a><br>\
+                <input type="text" id="syncEmail" placeholder="Email"/><a style="cursor:pointer;position:absolute;right:10px;" id="clearsyncEmail">x</a><br>\
+								<input type="text" id="syncSub" placeholder="Subject"/><a style="cursor:pointer;position:absolute;right:10px;" id="clearsyncSub">x</a><br>\
                 <span id="showSyncColor">Color: </span><input type="number" name="ColorAmount" id="syncAmount" placeholder="0" value="0" min="0" max="50" step="1" style="width:50px" title="How much color shall it be (0-50)? Depends on dark/bright theme">\
-                <input type="number" name="ColorHue" id="syncHue" placeholder="0" value="0" min="0" max="360" step="10" style="width:50px" title="Hue (0-360)">');
+                <input type="number" name="ColorHue" id="syncHue" placeholder="0" value="0" min="0" max="360" step="10" style="width:50px" title="Hue (0-360)"><a style="cursor:pointer;position:absolute;right:10px;" id="clearsyncCol">x</a>');
             prepField('CSname', 'syncName');
             prepField('CSemail', 'syncEmail');
             prepField('CSsub', 'syncSub');
             prepColor('CSamount', 'syncAmount');
             prepColor('CShue', 'syncHue');
+            if($.getVal('CSamount', 'unav') != 'unav' && $.getVal('CShue', 'unav') != 'unav' ) {
+              $('#showSyncColor').style.color = $.calcColor($.val($('#syncHue')), $.val($('#syncAmount')));
+            }
+            $('#clearsyncCol').addEventListener('click', function () {
+              $.delVal('CSamount');
+              $.delVal('CShue');
+              $('#syncAmount').value = '';
+              $('#syncHue').value = '';
+              $('#showSyncColor').style.color = "";
+            }, false);
+            if($.getVal('cuteOn', 'unav') == 'unav'){
+              $.setVal('cuteOn', "on");
+            }
+            if($.getVal('cuteOn', 'on') == 'on'){
+              $('#useCute').checked = true;
+            }
+
+            $('#useCute').addEventListener('change', function() {
+              if(this.checked) {
+                $.setVal('cuteOn', 'on');
+              } else {
+                $.setVal('cuteOn', 'off');
+              }
+            });
+
             $('#postForm').parentNode.addEventListener('submit', qrPosting, false);
         }
     }
@@ -443,14 +469,18 @@ function initCuteSync() {
         if(window.location.href.indexOf($.getVal('CSposting', 'undefined')) > -1) {
             $.setVal('CSposting', 'undefined');
             var $newPost = window.location.href.split('#p')[1];
-            $.getZ($$thread, $$board, $newPost, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub')));
-            $.getY($$thread, $$board, $newPost, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub')));
-            $.getX($$thread, $$board, $newPost, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub')));
+            if($.getVal('cuteOn', 'on') == 'on'){
+              $.getZ($$thread, $$board, $newPost, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub')));
+              $.getY($$thread, $$board, $newPost, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub')), $.val($('#syncAmount')), $.val($('#syncHue')));
+              $.getX($$thread, $$board, $newPost, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub')), $.val($('#syncAmount')), $.val($('#syncHue')));
+            }
         }
 		      d.addEventListener('4chanQRPostSuccess', function(e){
-            $.getZ($$thread, $$board, e.detail.postId, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub')));
-            $.getY($$thread, $$board, e.detail.postId, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub')), $.val($('#syncAmount')), $.val($('#syncHue')));
-            $.getX($$thread, $$board, e.detail.postId, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub')), $.val($('#syncAmount')), $.val($('#syncHue')));
+            if($.getVal('cuteOn', 'on') == 'on'){
+              $.getZ($$thread, $$board, e.detail.postId, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub')));
+              $.getY($$thread, $$board, e.detail.postId, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub')), $.val($('#syncAmount')), $.val($('#syncHue')));
+              $.getX($$thread, $$board, e.detail.postId, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub')), $.val($('#syncAmount')), $.val($('#syncHue')));
+            }
           }, false);
     }
     cfP();

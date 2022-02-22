@@ -1,7 +1,7 @@
 # Cute-Sync~
 
 
-![alt tag](https://raw.github.com/ErinSteph/Cute-Sync/master/cap.png)
+![alt tag](https://raw.github.com/ErinSteph/Cute-Sync/master/cap.png?)
 
 CuteSync is a small version of Milky's 4chan NameSync & Opros' FrenSync for /b/ and /soc/, designed for the 4chan mobile layout.
 

@@ -9,7 +9,7 @@
 // @icon http://i.imgur.com/nLnuluW.png
 // @updateURL     https://erinsteph.com/tfk/Cutesync.user.js
 // @downloadURL     https://erinsteph.com/tfk/Cutesync.user.js
-// @version        2.1.0
+// @version        2.1.1
 // ==/UserScript==
 
 function initCuteSync() {
@@ -421,12 +421,12 @@ function initCuteSync() {
 			      $nm['style'] = 'margin-left:auto;margin-right:auto;width:200px;text-align:center;border:1px solid;padding-bottom:10px;position:relative;';
 			      $nm = $.elm('div', $nm, $('#absbot'));
             $.htm($nm, '<div style="background:#EEAA88;margin-top:0px;position:relative;display:inline-block;width:100%;margin-bottom:10px;">\
-                <input type="checkbox" id="useCute" name="useCute" style="position:absolute;right:0px;" value="useCute"><h3 style="margin:3px;">CuteSync</h3></div>\
-								<input type="text" id="syncName" placeholder="Name"/><a style="cursor:pointer;position:absolute;right:10px;" id="clearsyncName">x</a><br>\
-                <input type="text" id="syncEmail" placeholder="Email"/><a style="cursor:pointer;position:absolute;right:10px;" id="clearsyncEmail">x</a><br>\
-								<input type="text" id="syncSub" placeholder="Subject"/><a style="cursor:pointer;position:absolute;right:10px;" id="clearsyncSub">x</a><br>\
-                <span id="showSyncColor">Color: </span><input type="number" name="ColorAmount" id="syncAmount" placeholder="0" value="0" min="0" max="50" step="1" style="width:50px" title="How much color shall it be (0-50)? Depends on dark/bright theme">\
-                <input type="number" name="ColorHue" id="syncHue" placeholder="0" value="0" min="0" max="360" step="10" style="width:50px" title="Hue (0-360)"><a style="cursor:pointer;position:absolute;right:10px;" id="clearsyncCol">x</a>');
+                <input type="checkbox" id="useCute" name="useCute" style="position:absolute;right:0px;" value="useCute"><h3 style="margin:3px;-webkit-text-stroke: 1px #4b4b4b;">CuteSync</h3></div>\
+								<input type="text" style="width:80%;" id="syncName" placeholder="Name"/><a style="cursor:pointer;position:absolute;right:5px;padding-top:2px;font-size:small;" id="clearsyncName">x</a><br>\
+                <input type="text" style="width:80%;" id="syncEmail" placeholder="Email"/><a style="cursor:pointer;position:absolute;right:5px;padding-top:2px;font-size:small;" id="clearsyncEmail">x</a><br>\
+								<input type="text" style="width:80%;" id="syncSub" placeholder="Subject"/><a style="cursor:pointer;position:absolute;right:5px;padding-top:2px;font-size:small;" id="clearsyncSub">x</a><br>\
+                <span id="showSyncColor" style="font-size:small;">Color: </span><input type="number" name="ColorAmount" id="syncAmount" placeholder="0" value="0" min="0" max="50" step="1" style="width:50px" title="How much color shall it be (0-50)? Depends on dark/bright theme">\
+                <input type="number" name="ColorHue" id="syncHue" placeholder="0" value="0" min="0" max="360" step="10" style="width:50px" title="Hue (0-360)"><a style="cursor:pointer;position:absolute;right:5px;padding-top:2px;font-size:small;" id="clearsyncCol">x</a>');
             prepField('CSname', 'syncName');
             prepField('CSemail', 'syncEmail');
             prepField('CSsub', 'syncSub');

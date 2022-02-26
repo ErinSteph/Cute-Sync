@@ -7,9 +7,9 @@
 // @include        *4chan.org/b/*
 // @include        *4chan.org/soc/*
 // @icon http://i.imgur.com/nLnuluW.png
-// @updateURL     https://erinsteph.com/tfk/Cutesync.user.js
-// @downloadURL     https://erinsteph.com/tfk/Cutesync.user.js
-// @version        2.1.2
+// @updateURL     https://github.com/ErinSteph/Cute-Sync/raw/master/Cutesync.user.js
+// @downloadURL     https://github.com/ErinSteph/Cute-Sync/raw/master/Cutesync.user.js
+// @version        2.1.3
 // ==/UserScript==
 
 function initCuteSync() {

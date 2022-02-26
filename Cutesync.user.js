@@ -9,7 +9,7 @@
 // @icon http://i.imgur.com/nLnuluW.png
 // @updateURL     https://erinsteph.com/tfk/Cutesync.user.js
 // @downloadURL     https://erinsteph.com/tfk/Cutesync.user.js
-// @version        2.1.1
+// @version        2.1.2
 // ==/UserScript==
 
 function initCuteSync() {
@@ -469,14 +469,14 @@ function initCuteSync() {
         if(window.location.href.indexOf($.getVal('CSposting', 'undefined')) > -1) {
             $.setVal('CSposting', 'undefined');
             var $newPost = window.location.href.split('#p')[1];
-            if($.getVal('cuteOn', 'on') == 'on'){
+            if($('#useCute').checked){
               $.getZ($$thread, $$board, $newPost, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub')));
               $.getY($$thread, $$board, $newPost, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub')), $.val($('#syncAmount')), $.val($('#syncHue')));
               $.getX($$thread, $$board, $newPost, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub')), $.val($('#syncAmount')), $.val($('#syncHue')));
             }
         }
 		      d.addEventListener('4chanQRPostSuccess', function(e){
-            if($.getVal('cuteOn', 'on') == 'on'){
+            if($('#useCute').checked){
               $.getZ($$thread, $$board, e.detail.postId, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub')));
               $.getY($$thread, $$board, e.detail.postId, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub')), $.val($('#syncAmount')), $.val($('#syncHue')));
               $.getX($$thread, $$board, e.detail.postId, $.val($('#syncName')), $.val($('#syncEmail')), $.val($('#syncSub')), $.val($('#syncAmount')), $.val($('#syncHue')));

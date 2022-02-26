@@ -5,11 +5,11 @@
 // @author        Erin !kittensORw
 // @credits        Milky and namesync, Opros and frensync
 // @include        *4chan.org/b/*
-// @include        *4chan.org/soc/*
+// @include        *4chan.org/trash/*
 // @icon http://i.imgur.com/nLnuluW.png
 // @updateURL     https://github.com/ErinSteph/Cute-Sync/raw/master/Cutesync.user.js
 // @downloadURL     https://github.com/ErinSteph/Cute-Sync/raw/master/Cutesync.user.js
-// @version        2.1.3
+// @version        2.1.4
 // ==/UserScript==
 
 function initCuteSync() {

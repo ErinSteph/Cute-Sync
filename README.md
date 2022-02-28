@@ -23,4 +23,4 @@ iOS installation instructions [here](https://github.com/ErinSteph/Cute-Sync/blob
 
 Android installation instructions [here](https://github.com/ErinSteph/Cute-Sync/blob/master/Android.md)
 
-(You can also use these instructions to install [iFagFinder](https://github.com/ErinSteph/iFagFinder/raw/master/iFagFinder.user.js), a light, read-only version of the Tripfag Finder, to make finding threads on mobile easier.)
+(You can also use these instructions to install [iFagFinder](https://github.com/ErinSteph/iFagFinder/raw/master/iFagFinder.user.js), a light, read-only version of the [Tripfag Finder](https://github.com/ErinSteph/Tripfag-Finder-K), to make finding threads on mobile easier.)

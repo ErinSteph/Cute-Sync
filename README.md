@@ -11,9 +11,17 @@ It does not require 4chan X
 ## Notes~
 
 
-Will update names on boards and in threads and on every auto update.
+Will update names on boards* and in threads and on every auto update.
 
 Set your name in the fields at the page footer.
+
+## *Known Bug~
+
+I am aware it seems to be broken on board index pages and will always sync the OP of the top thread if there is a synced thread on the page.
+
+I cannot be bothered fixing this right now, but it still works fine inside threads!
+
+I am lazy and gay, but will get round to it eventually.
 
 
 ### Installing~

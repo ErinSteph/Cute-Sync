@@ -1,6 +1,8 @@
 # Installing on Android
 
-First you must create an addon collection.
+## First steps on desktop
+
+First you must create an addon collection on desktop.
 
 Go to http://addons.mozilla.org/ and sign in.
 
@@ -19,6 +21,8 @@ Give your collection a name, etc.
 Add ViolentMonkey via the search bar
 
 ![alt tag](https://raw.github.com/ErinSteph/Cute-Sync/master/installing/d.png)
+
+## Next steps on mobile
 
 Install Firefox Nightly from the Google Play Storage
 
